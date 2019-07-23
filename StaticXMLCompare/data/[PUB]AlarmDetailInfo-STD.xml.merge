@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="GBK" ?>
+<!--接入传输告警详细信息 -->
+<static-data>
+    <element-list>
+        <!--统一告警代码-->
+        <element name="unitypeno" primay-key="true" data-type="int" />   
+        <!--中文告警原因-->
+        <element name="cnreason" data-type="string" />
+        <!--中文告警解决的方法-->
+        <element name="cnsolution" data-type="string" />
+        <!--网元类型-->
+        <element name="devtype" data-type="int" />
+        <!--英文告警原因-->
+        <element name="enreason" data-type="string" />
+        <!--英文告警解决的方法-->
+        <element name="ensolution" data-type="string" />
+    </element-list>
+    <data>
+		<row>
+			<col>220</col>
+			<col>(1)由于光路中光纤或光路盘故障,引起DCC信道不通.(2)网元未开通或网元电源中断.(3)单盘故障.</col>
+			<col>(1)检查光纤.光路盘工作是否正常.(2)检查网元是否开通,网元是否上电.(3)检查EMU的拨号是否正确.</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>724</col>
+			<col>(1)网元存在BACKUP_FAULT告警，导致倒换失败 (2)机盘故障</col>
+			<col>(1)清除告警的机盘的BACKUP_FAULT告警 (2)更换告警机盘 (3)尝试恢复主用路径 (4)联系烽火通信售后维护工程师</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>1450</col>
+			<col>（1）门限设置过高 （2）外部供电的直流电压过低 </col>
+			<col>(1)调整直流电压过低门限值 (2)调高外部供电电源电压 (3)联系烽火通信售后维护工程师</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>1921</col>
+			<col>(1)断纤或无光纤连接 (2)激光器关闭 (3)线路衰耗过大 (4)本站接收部分故障 (5)对端站发送部分故障</col>
+			<col>(1)当线路衰耗过大或出现断纤现象时，更换光纤 (2)在网管上检查并确保本端相关端口的激光器开关设为“开” (3)保持对端站的发送光功率正常 (4)使本端告警机盘正常(5)联系烽火通信售后维护工程师</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>2025</col>
+			<col>(1)温度告警上限设置不符合实际情况 (2)风扇停止工作或防尘网积累灰尘过多 (3)机房制冷设备故障，导致环境温度过高 (4)机盘故障 </col>
+			<col>(1)查询温度上限设置和机盘目前工作温度，判断告警是否误报，若误报，则无需处理；否则，将温度告警上报值设为合理值 (2)清除风扇单元出现的告警 (3)清洁防尘网 (4)使设备工作环境温度正常 (5)更换故障机盘 (6)联系烽火通信售后维护工程师</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>2085</col>
+			<col>(1)告警机盘网管上的告警电平设置错误 (2)电源盘防雷模块故障</col>
+			<col>(1)查看该告警机盘的“单盘配置”中的“告警电平”，如果是“高电平”，改为“低电平”  (2)需更换电源盘 (3)联系烽火通信售后维护工程师</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>2400</col>
+			<col>光纤未连接或断裂,或者无线链路异常</col>
+			<col>检查光(链)路</col>
+			<col>0</col>
+			<col>The optical fibers are disconnected or  broken down, or radio link abnormal.</col>
+			<col>Examine the optical (link) lines.</col>
+		</row>
+		<row>
+			<col>2454</col>
+			<col>OLT入网时发生错误（OLT register failed）</col>
+			<col>检查是否资源系统与网管通信不畅</col>
+			<col>0</col>
+			<col>The registration of OLT fails.</col>
+			<col>(Please check the communication with RMS)</col>
+		</row>
+		<row>
+			<col>2457</col>
+			<col>HG入网时发生错误</col>
+			<col>检查是否资源系统与网管通信不畅</col>
+			<col>0</col>
+			<col>HG register failed</col>
+			<col>(Please check the communication with RMS)</col>
+		</row>
+		<row>
+			<col>2469</col>
+			<col>系统发生次要告警</col>
+			<col>检查设备，依据设备告警类型处理</col>
+			<col>0</col>
+			<col>Secondary Alarm of system happened</col>
+			<col>check devices,  deal according to the specific  secondary alarm</col>
+		</row>
+		<row>
+			<col>2470</col>
+			<col>系统发生次要告警</col>
+			<col>检查环境，采取加湿措施</col>
+			<col>0</col>
+			<col>Low environmental humidity</col>
+			<col>Check environment and sensors, take measures for humidification</col>
+		</row>
+		<row>
+			<col>2472</col>
+			<col>输入交流电压超过门限值</col>
+			<col>检查门限值和输入电压值</col>
+			<col>0</col>
+			<col>AC voltage exceeds threshold</col>
+			<col>Check the value of  threshold and the input AC voltage</col>
+		</row>
+		<row>
+			<col>2477</col>
+			<col>环境湿度过高</col>
+			<col>检查环境，采取干燥措施</col>
+			<col>0</col>
+			<col>High environmental humidity</col>
+			<col>Check the environment, take some dry measures</col>
+		</row>
+		<row>
+			<col>2478</col>
+			<col>环境温度过高</col>
+			<col>检查环境，确认温度，采取降温措施</col>
+			<col>0</col>
+			<col>High environmental Temperature</col>
+			<col>Check the environment, , take some cooling measures after confirmed temperature</col>
+		</row>
+		<row>
+			<col>2482</col>
+			<col>整理器直流电压超过允许的范围</col>
+			<col>查看整流模块，关闭告警模块，按正常程序重新启动一次，若问题仍然存在请更换模块</col>
+			<col>0</col>
+			<col>DC voltage of rectifer exceeds the limit</col>
+			<col>Check rectifier module, close the alarm module, and restart  the module according to normal procedure, if the problem persists, please replace the module</col>
+		</row>
+		<row>
+			<col>2483</col>
+			<col>整理器交流电压超过允许的范围</col>
+			<col>查看整流模块，关闭告警模块，按正常程序重新启动一次，若问题仍然存在请更换模块</col>
+			<col>0</col>
+			<col>AC voltage of rectifer exceeds the limit</col>
+			<col>Check rectifier module, close the alarm module, and restart  the module according to normal procedure, if the problem persists, please replace the module</col>
+		</row>
+		<row>
+			<col>2516</col>
+			<col>有ONU长发光</col>
+			<col>定位并更换漏光的ONU。具体方法是：若告警附加信息中有明确的ONU号和物理标识信息，则找到该ONU并更换；若没有明确的ONU信息，需对一个OLT PON口下未授权的ONU进行排查。具体方法是，在分路器处，逐个取下连接在分路器上的支路光纤，并插到PON专用的光功率计上，查看支路上是否有光。若没有表明正常，若有漏光，则说明此支路光纤连接的ONU光模块漏光，需要更换此ONU</col>
+			<col>0</col>
+			<col>　Laser of certain ONU always on</col>
+			<col>First locate the ONU in trouble. If the reserved information contains the onu information, just replace the one. Else check all of the un-authenticated ONUs of the PON, pull out  of every branch fiber connected to the splitter, then insert into the optical power detector. If no optical power detected, the ONU is OK, else the ONU needs to be replaced.</col>
+		</row>
+		<row>
+			<col>2553</col>
+			<col>接收的CCM帧等级低于该接收MEP的等级</col>
+			<col>检查网络连接情况。排查网络故障</col>
+			<col>0</col>
+			<col>The grade of the CCM frames received is lower than that of the receiving MEP.</col>
+			<col>Examine the network connection. Hunt for the fault with  network.</col>
+		</row>
+		<row>
+			<col>2554</col>
+			<col>接收包中的的MEP ID不正确</col>
+			<col>检查网络连接情况。排查网络故障</col>
+			<col>0</col>
+			<col>The MEP ID in the packet received is incorrect.</col>
+			<col>Examine the network connection. Hunt for the fault with  network.</col>
+		</row>
+		<row>
+			<col>2587</col>
+			<col>在内部的IAD和软交换平台之间连接丢失，或缺少心跳包时产生</col>
+			<col>联系技术支持。当连接正常后告警消失。</col>
+			<col>0</col>
+			<col>between inner IAD and SS platform，such as Lose of SS，no keepalive packets，etc</col>
+			<col>Contact technical support. When connected to normal alarm disappears.</col>
+		</row>
+		<row>
+			<col>2615</col>
+			<col>1.对于用户端口：给用户分配的带宽不足，速率超过告警门限。
+2.对于上联端口：域值配置有误或上行速率高于域值
+</col>
+			<col>1.对于用户端口，可为用户分配更大的上行带宽.
+2.不解决。
+3.对于上联端口：检查门限值或增加上联口上行带宽。</col>
+			<col>0</col>
+			<col>1.No enough up bandwidth, upstream rate over alarm threshold for user port.
+2. The value of threshold configured error or upstream rate over threshold for uplink port.
+</col>
+			<col>1.Offer more up bandwidth for user port.
+2.None.
+3.Check the threshold value or Offer more up bandwidth for link port.</col>
+		</row>
+		<row>
+			<col>2616</col>
+			<col>1.对于用户端口：给用户分配的带宽不足，速率超过告警门限。
+2.对于上联端口：域值配置有误或下行速率高于域值
+</col>
+			<col>1.为用户分配更大的下行带宽
+2.不解决。
+3.对于上联端口：检查门限值或增加上联口下行带宽。</col>
+			<col>0</col>
+			<col>1.No enough down bandwidth, Downstream rate over alarm threshold for user port.
+2. The value of threshold configured error or downstream rate over threshold for uplink port.</col>
+			<col>1.Offer more down bandwidth
+2.None.
+3.Check the threshold value or Offer more down bandwidth for link port.</col>
+		</row>
+		<row>
+			<col>2618</col>
+			<col>1.对于用户端口：给用户分配的带宽不足，速率超过预警门限
+2.对于上联端口：域值配置有误或下行速率高于预警域值</col>
+			<col>1.为用户分配更大的下行带宽
+2.不解决
+3.对于上联端口：检查门限值或增加上联口上行带宽。</col>
+			<col>0</col>
+			<col>1.No enough up bandwidth, downstream rate over warning threshold.
+2. The value of threshold configured error or downstream rate over warning threshold for uplink port.</col>
+			<col>1.Offer more down bandwidth
+2.None.
+3.Check the threshold value or Offer more down bandwidth for link port.</col>
+		</row>
+		<row>
+			<col>2620</col>
+			<col>1.对于用户端口：给用户分配的带宽不足，速率超过预警门限
+2.对于上联端口：域值配置有误或上行速率高于预警域值</col>
+			<col>1.为用户分配更大的上行带宽
+2.不解决
+3.对于上联端口：检查门限值或增加上联口上行带宽。</col>
+			<col>0</col>
+			<col>1.No enough up bandwidth, upstream rate over warning threshold.
+2. The value of threshold configured error or upstream rate over warning threshold for uplink port.</col>
+			<col>1.Offer more up bandwidth
+2.None.
+3.Check the threshold value or Offer more up bandwidth for link port.</col>
+		</row>
+		<row>
+			<col>2623</col>
+			<col>主用核心交换盘和备用核心交换盘硬件不一致，如主用核心交换盘是FSWB， 备用核心交换盘是GSWB</col>
+			<col>更换备盘，换成和主用核心交换盘相同的类型</col>
+			<col>0</col>
+			<col>The hardware type of the master card is different with the backup card.eg,the master switch card type is FSWB,and the  backup switch card type is GSWB</col>
+			<col>change the backup switch card to the same type as the master switch card . </col>
+		</row>
+		<row>
+			<col>2659</col>
+			<col>端口连接
+的时钟参
+考源丢失</col>
+			<col>请检查对接设备是否工作正常，并保证端口与对接设备的线路连接正常。若仍不能消除告警请联系技术支持处理</col>
+			<col>0</col>
+			<col>Connected 
+Reference  
+source LOS</col>
+			<col>Please 
+check connection of device.</col>
+		</row>
+		<row>
+			<col>2663</col>
+			<col>线卡PON口插入了不匹配的光模块</col>
+			<col>更换该PON口光模块至类型匹配的光模块</col>
+			<col>0</col>
+			<col>The transceiver class is not matched with the linecard hardware</col>
+			<col>Replace the transceiver with a matched one.</col>
+		</row>
+		<row>
+			<col>2715</col>
+			<col>域值配置有误或广播速率高于域值</col>
+			<col>1.检查门限值或降低上行广播包速率</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink broadcast rate is more than threshold</col>
+			<col>1.Check the threshold value or reduce the up broadcast rate 2. None</col>
+		</row>
+		<row>
+			<col>2716</col>
+			<col>域值配置有误或广播速率高于域值</col>
+			<col>1.检查门限值或降低下行广播包速率</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink broadcast rate is more than threshold</col>
+			<col>1.Check the threshold value or reduce the down broadcast rate 2. None</col>
+		</row>
+		<row>
+			<col>2717</col>
+			<col>域值配置有误或丢包率高于域值</col>
+			<col>1.检查门限值或降低丢包速率</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink dropped rate is more than threshold</col>
+			<col>1.Check the threshold value or reduce the dropped rate</col>
+		</row>
+		<row>
+			<col>2718</col>
+			<col>域值配置有误或带宽利用率高于最大域值</col>
+			<col>1.检查门限值或降低上行速率
+2.增加带宽
+3. 不解决</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink up bandwidth propotion is more than max threshold</col>
+			<col>1.Check the threshold value or reduce the up rate 
+2. increase bandwidth
+3. none</col>
+		</row>
+		<row>
+			<col>3051</col>
+			<col>RAU不在位</col>
+			<col>无需解决，联系技术支持</col>
+			<col>0</col>
+			<col>RAU error, perhaps 1.Microwave LO (Local Oscillator) unlock 2.others.</col>
+			<col>No solution is required.please contact the technical support engineer.</col>
+		</row>
+		<row>
+			<col>5022</col>
+			<col>None</col>
+			<col>None</col>
+			<col>0</col>
+			<col>None</col>
+			<col>None</col>
+		</row>
+		<row>
+			<col>60115</col>
+			<col>License资源超过门限时产生</col>
+			<col>升级License或释放License资源</col>
+			<col>0</col>
+			<col>License Resource
+Over 
+Threshold
+</col>
+			<col>Update License or Release Resource</col>
+		</row>
+		<row>
+			<col>60116</col>
+			<col>License资源不够时产生</col>
+			<col>升级License或释放License资源</col>
+			<col>0</col>
+			<col>License Resource 
+is full
+</col>
+			<col>Update License or Release Resource</col>
+		</row>
+		<row>
+			<col>60117</col>
+			<col>光模块不在位</col>
+			<col>插入光模块</col>
+			<col>0</col>
+			<col>The optmodule is not present</col>
+			<col>insert the optmodule</col>
+		</row>
+		<row>
+			<col>60128</col>
+			<col>OMCI 通道不同或MIC校验错误。</col>
+			<col>ONU重认证，ONU去激活或者Disbale，或者执行流氓ONU检测</col>
+			<col>0</col>
+			<col>NO OMCI channel or mic check fail.</col>
+			<col>ONU re-authentication, ONU deactivation or disabling, or execution of rogue ONU diagnostic procedures</col>
+		</row>
+		<row>
+			<col>61005</col>
+			<col>域值配置有误或带宽利用率高于最大域值</col>
+			<col>1.检查门限值或降低下行速率
+2.增加带宽
+3. 不解决</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink down bandwidth propotion is more than max threshold</col>
+			<col>1.Check the threshold value or reduce the down rate 
+2. increase bandwidth
+3. none</col>
+		</row>
+		<row>
+			<col>61006</col>
+			<col>域值配置有误或带宽利用率低于最小域值</col>
+			<col>1.检查门限值或提高上行速率
+2.检查业务是否中断
+3.不解决</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink up bandwidth propotion is lower than min threshold</col>
+			<col>1.Check the threshold value or increase the up rate 
+2. check the service is break off
+3. none</col>
+		</row>
+		<row>
+			<col>61007</col>
+			<col>域值配置有误或带宽利用率低于最小域值</col>
+			<col>1.检查门限值或提高下行速率
+2.检查业务是否中断
+3. 不解决</col>
+			<col>0</col>
+			<col>The threshold value is incorrect or uplink down bandwidth propotion is lower than min threshold</col>
+			<col>1.Check the threshold value or increase the down rate 
+2. check the service is break off
+3. none</col>
+		</row>
+		<row>
+			<col>61039</col>
+			<col>域值配置有误或洪泛高于域值</col>
+			<col>1.检查门限值或检查下行的广播包、未知包单播包、组播包过多原因2.不解决</col>
+			<col>0</col>
+			<col>The config threshold value is incorrect or the flooding exceeds the config threshold</col>
+			<col>1.Check the threshold value or check the reason why so many down broadcast, multicast, unknown packets for link port
+2.  None</col>
+		</row>
+		<row>
+			<col>61053</col>
+			<col>环境温度超过预警门限值</col>
+			<col>检查环境，确认温度，采取降温措施</col>
+			<col>0</col>
+			<col>The environmental Temperature  exceeds the warning threshold</col>
+			<col>Check the environment, , take some cooling measures after confirmed temperature</col>
+		</row>
+		<row>
+			<col>62079</col>
+			<col>检测到槽位跟槽位、槽位跟上联口、上联口和上联口之间存在MAC地址漂移</col>
+			<col>查看MAC地址漂移信息表并消除</col>
+			<col>0</col>
+			<col>OLT detected MAC move on main board switch ports: slot and slot, slot and uplink port, uplink and uplink port</col>
+			<col>Look up mac move table, handle it</col>
+		</row>
+		<row>
+			<col>62090</col>
+			<col>电池失效</col>
+			<col>检查直流电源输入是否正常</col>
+			<col>0</col>
+			<col>DC FAILED</col>
+			<col>check the dc power input is normal or not</col>
+		</row>
+		<row>
+			<col>62094</col>
+			<col>内置时钟、关键芯片、硬件电路等故障告警</col>
+			<col>查看单盘硬件运行状况，联系技术支持</col>
+			<col>0</col>
+			<col>The failure of internal clock, PTP chip or hardware circuit.</col>
+			<col>Check the card hardware's running status and contact technical support.</col>
+		</row>
+		<row>
+			<col>62098</col>
+			<col>时间输出模块工作异常</col>
+			<col>查看单盘硬件运行状况，联系技术支持</col>
+			<col>0</col>
+			<col>The failure of time output module.</col>
+			<col>Check the card hardware's running status and contact technical support.</col>
+		</row>
+		<row>
+			<col>3999</col>
+			<col>OSPF链路状态发生变化</col>
+			<col>检查链路，端口是否断开，ARP表项是否正常和协议状态是否正常</col>
+			<col>0</col>
+			<col>ospf link status change</col>
+			<col>check the link,whether the port is link down, the ARP table is normal and the protocol status is OK</col>
+		</row>
+		<row>
+			<col>4000</col>
+			<col>上行线路速率低于门限值</col>
+			<col>检查线路质量</col>
+			<col>0</col>
+			<col>Upstream line rate is less than the threshold </col>
+			<col>Check line quality</col>
+		</row>
+		<row>
+			<col>4001</col>
+			<col>下行线路速率低于门限值</col>
+			<col>检查线路质量</col>
+			<col>0</col>
+			<col>Downstream line rate is less than the threshold </col>
+			<col>Check line quality</col>
+		</row>
+		<row>
+			<col>4002</col>
+			<col>上行可达速率低于门限值</col>
+			<col>检查线路质量</col>
+			<col>0</col>
+			<col>Upstream attainable rate is less than the threshold </col>
+			<col>Check line quality</col>
+		</row>
+		<row>
+			<col>4003</col>
+			<col>下行可达速率低于门限值</col>
+			<col>检查线路质量</col>
+			<col>0</col>
+			<col>Downstream attainable rate is less than the threshold </col>
+			<col>Check line quality</col>
+		</row>
+		<row>
+			<col>4004</col>
+			<col>上行净荷速率低于门限值</col>
+			<col>检查线路质量</col>
+			<col>0</col>
+			<col>Upstream net rate is less than the threshold  </col>
+			<col>Check line quality</col>
+		</row>
+		<row>
+			<col>4005</col>
+			<col>下行净荷速率低于门限值</col>
+			<col>检查线路质量</col>
+			<col>0</col>
+			<col>Downstream net rate is less than the threshold </col>
+			<col>Check line quality</col>
+		</row>
+		<row>
+			<col>4006</col>
+			<col>风扇人工停转</col>
+			<col>检查风扇状态</col>
+			<col>0</col>
+			<col>Fan manual stop</col>
+			<col>Check fan status</col>
+		</row>
+	</data>
+</static-data>
