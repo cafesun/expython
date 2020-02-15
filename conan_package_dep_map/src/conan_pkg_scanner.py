@@ -4,7 +4,7 @@
 import argparse
 from pylogger import getLogger
 from pylogger import initLogger
-from package_analyser import ConanPkgAnalyzer
+from package_dot_analyser import ConanPkgDotAnalyzer
 from db_sqlite_serializer import DBSqlite3Serializer
 
 def main() :
@@ -12,17 +12,15 @@ def main() :
     getLogger().debug("parsing argument")
     parser = argparse.ArgumentParser()
     parser.add_argument("--scanpath", "-s", help="scan package path", type=str, default="", nargs="?")
-    parser.add_argument("--type", "-t", help="conan package user type:[platform|msmp|core|ext|auto]",
-                        type=str, default="auto", nargs="?")
+    parser.add_argument("--branch", "-b", help="project branch", type=str, default="", nargs="?")
     parser.add_argument("--export", "-e", help="export[none|csv]", type=str, default="none", nargs="?")
     #    parser.add_argument("path", help="package root dir", type=str, default=".")
     args = parser.parse_args()
-    getLogger().debug("scan path : %s" %(args.scanpath))
+    getLogger().debug("scan path=%s branch=%s export=%s" %(args.scanpath, args.branch, args.export))
     #getLogger().debug("output path : %s" % (args.outputpath))
-    getLogger().debug("conan package usertype : %s" % (args.type))
 
     if (args.scanpath != "") :
-        platformAnalyser = ConanPkgAnalyzer(args.scanpath, args.type)
+        platformAnalyser = ConanPkgDotAnalyzer(args.scanpath, args.branch)
         getLogger().debug("Platform Pkg Analyser begin anlalysing!")
         platformAnalyser.analyse()
         getLogger().debug("Platform Pkg Analyser begin anlalysing!")

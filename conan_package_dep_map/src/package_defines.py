@@ -8,7 +8,7 @@ class PackageInfo(object):
     def __init__(self):
         self.branch = ""
         self.packageName = ""
-        self.packagePath = ""
+        self.packageFullName = ""
         self.version =""
         self.channel = ""
         self.user = ""
@@ -17,7 +17,7 @@ class PackageInfo(object):
         return self.packageName
 
     def getPackagePath(self):
-        return self.packagePath
+        return self.packageFullName
 
     def getPkgID(self):
         pkgId = "%s/%s@%s/%s" % (self.packageName, self.version, self.user, self.channel)

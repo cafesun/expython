@@ -66,7 +66,7 @@ class ConanPkgAnalyzer(object):
                 packageInfo.packageName = name
                 packageInfo.channel = self._channel
                 packageInfo.version = parser.getAttribute("version")
-                packageInfo.packagePath = pkgName
+                packageInfo.packageFullName = pkgName
                 packageInfo.user = packgeUserType
                 if (None == name) :
                     getLogger().error("%s parse version failed!" %fullFileName)
