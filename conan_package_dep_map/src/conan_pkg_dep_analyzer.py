@@ -33,7 +33,7 @@ def main() :
             dbSerializer.set(pkgMap.values())
         if (args.export != "none") :
             exporter = CSVExporter(dbSerializer)
-            exporter.export()
+            exporter.exportEx()
         dbSerializer.close()
         getLogger().info("close db normally!")
     except:

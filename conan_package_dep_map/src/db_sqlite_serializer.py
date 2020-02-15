@@ -55,14 +55,16 @@ class DBSqlite3Serializer(object):
         self.__conn.commit()
         cursor.close()
 
-    def getAllPackageID(self):
+    def getAllPackageID(self, user=""):
         '''获取所有包的ID'''
         packageIDList = []
         cursor = self.__conn.cursor()
-        queryTblSql = '''
-                                            select distinct(cid) from t_conan_pkginfo
-                                        '''
-        cursor.execute(queryTblSql)
+        if (user == ""):
+            queryTblSql = '''select distinct(cid) from t_conan_pkginfo'''
+            cursor.execute(queryTblSql)
+        else:
+            queryTblSql = '''select distinct(cid) from t_conan_pkginfo where ctype=?'''
+            cursor.execute(queryTblSql, (user, ))
         row = cursor.fetchone()
         while (None != row):
             packageID = row[0]
@@ -71,14 +73,16 @@ class DBSqlite3Serializer(object):
         cursor.close()
         return set(packageIDList)
 
-    def getAllPackageName(self):
+    def getAllPackageName(self, user=""):
         '''获取所有包的名称'''
         packageNameList = []
         cursor = self.__conn.cursor()
-        queryTblSql = '''
-                                            select distinct(cname) from t_conan_pkginfo
-                                        '''
-        cursor.execute(queryTblSql)
+        if (user == "") :
+            queryTblSql = '''select distinct(cname) from t_conan_pkginfo'''
+            cursor.execute(queryTblSql)
+        else :
+            queryTblSql = '''select distinct(cname) from t_conan_pkginfo where ctype=?'''
+            cursor.execute(queryTblSql, (user,))
         row = cursor.fetchone()
         while (None != row):
             packageName = row[0]
@@ -123,7 +127,7 @@ class DBSqlite3Serializer(object):
             row = cursor.fetchone()
         cursor.close()
 
-    def queryEx(self, branch, result):
+    def queryEx(self, branch, result, user=""):
         '''查询指定分支下的所有包信息,返回的map key为package Name'''
         cursor = self.__conn.cursor()
         queryTblSql = '''
