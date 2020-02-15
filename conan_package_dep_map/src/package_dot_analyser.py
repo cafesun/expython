@@ -44,24 +44,12 @@ class ConanPkgDotAnalyzer(object):
                 self.__packageDict[itPkgName] = pkgInfo
 
 
-    def analyzePkg(self, packageName):
+    def analyzePkg(self, packageID):
         '''parser package info from package name'''
-        packageInfo = PackageInfo()
+        packageInfo = PackageInfo.extract(packageID)
+        if (None == packageInfo) :
+            return packageInfo
         packageInfo.branch = self.__branch
-        packageInfo.packageFullName = packageName
-        posName = packageName.find("/")
-        if (posName == -1) :
-            return None
-        packageInfo.packageName = packageName[0 : posName]
-        posVersion = packageName.find("@")
-        if (posVersion == -1) :
-            return None
-        packageInfo.version = packageName[posName + 1 : posVersion]
-        posUser = packageName.find("/", posName + 1)
-        if (posUser == -1) :
-            return None
-        packageInfo.user = packageName[posVersion + 1 : posUser]
-        packageInfo.channel = packageName[posUser + 1 :]
         if (self.__branch == "") :
             packageInfo.branch = packageInfo.channel
         return packageInfo
