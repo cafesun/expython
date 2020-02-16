@@ -2,7 +2,14 @@
 # -*- coding:utf8 -*-
 
 import argparse
-import configparser
+import sys
+if sys.version_info.major == 2:
+    #python 2
+    from ConfigParser import ConfigParser
+else:
+    #python 3
+    from configparser import ConfigParser
+
 from pylogger import getLogger
 from pylogger import initLogger
 from package_dot_analyser import ConanPkgDotAnalyzer
@@ -26,7 +33,7 @@ def main() :
     configpath = ""
     if (args.config=="") :
         configpath = "../conf/config.ini"
-    config = configparser.ConfigParser()
+    config = ConfigParser()
     config.read(configpath, encoding="utf-8")
     dbtype = config.get("config", "dbtype")
     #getLogger().debug("output path : %s" % (args.outputpath))

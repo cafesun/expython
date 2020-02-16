@@ -10,12 +10,14 @@ class DBSerializerFactory(object):
         varInstance = None
         if (type == "MySQL"):
             host = args.get("host")
+            host = "" if host == None else host.strip()
             user = args.get("user")
+            user = "" if user == None else user.strip()
             passwd = args.get("password")
+            passwd = "" if passwd == None else passwd.strip()
             varInstance = DBMySqlSerializer(host, user, passwd)
         elif (type == "SQLite") :
             dbpath = args.get("dbpath")
-            if (None == dbpath) :
-                dbpath = ""
+            dbpath = "" if dbpath == None else dbpath.strip()
             varInstance = DBSqlite3Serializer(dbpath)
         return varInstance

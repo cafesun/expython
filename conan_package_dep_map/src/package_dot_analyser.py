@@ -11,12 +11,30 @@ from pylogger import getLogger
 class ConanPkgDotAnalyzer(object):
     '''conan包分析器'''
     def __init__(self, scanpath, branch=""):
-        self.__scanpath = scanpath
-        self.__branch = branch
+        self.__scanpath = scanpath.strip()
+        self.__scanpath.rstrip('/')
+        self.__scanpath.rstrip('\\')
+        self.__branch = branch.strip()
         self.__packageDict = {}
 
     def analyse(self):
         '''解析dot文件'''
+        branch = ""
+        channelTxtPath = self.__scanpath + "/channel.txt"
+        if (not os.path.exists(channelTxtPath)):
+            getLogger().fatal("No channel.txt file found")
+            basename = os.path.basename(self.__scanpath)
+            branch = "dev" + "." + basename
+        else:
+            with open(channelTxtPath, "r") as channelTxtHdr:
+                branch = channelTxtHdr.readline()
+                branch = branch.strip()
+        if (branch == "") :
+            getLogger().error("Branch is empty!")
+            return
+        if (self.__branch == "" and branch != ""):
+            self.__branch = branch
+
         if self.__scanpath[-1:]=='/':
             dependencyDotPath = self.__scanpath + "dependency.dot"
         else:
