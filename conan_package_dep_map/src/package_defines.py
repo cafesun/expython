@@ -21,6 +21,7 @@ class PackageInfo(object):
         pkgId = "%s/%s@%s/%s" % (self.packageName, self.version, self.user, self.channel)
         return pkgId
 
+    @staticmethod
     def extract(packageId):
         packageInfo = PackageInfo()
         packageID = packageId.strip('"')

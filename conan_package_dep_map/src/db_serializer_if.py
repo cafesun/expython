@@ -3,7 +3,7 @@
 
 from abc import ABC, abstractmethod
 
-class DBSerializerIf(ABC):
+class DBSerializerIf(object):
     '''数据库抽象接口'''
 
     @abstractmethod

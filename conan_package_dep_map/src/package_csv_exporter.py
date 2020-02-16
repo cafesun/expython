@@ -41,7 +41,7 @@ class CSVExporter(object):
             # write header
             strHeader = "package name"
             for branch in branchSet:
-                strHeader = "%s, %s," %(strHeader, branch)
+                strHeader = "%s, %s" %(strHeader, branch)
             exportFile.write(strHeader)
             exportFile.write("\n")
             for itPkg, subTbl in packageTbl.items():
@@ -50,7 +50,7 @@ class CSVExporter(object):
                     versionStr = "None"
                     if (None != verInstance):
                         versionStr = verInstance.version
-                    dataLine = "%s, %s," % (dataLine, versionStr)
+                    dataLine = "%s, %s" % (dataLine, versionStr)
                 exportFile.write(dataLine)
                 exportFile.write("\n")
 
@@ -79,7 +79,7 @@ class CSVExporter(object):
             # write header
             strHeader = "package name"
             for branch in branchSet:
-                strHeader = "%s, %s," % (strHeader, branch)
+                strHeader = "%s, %s" % (strHeader, branch)
             exportHandle.write(strHeader)
             exportHandle.write("\n")
             self.saveTo(packageExtTbl, exportHandle)
@@ -94,7 +94,7 @@ class CSVExporter(object):
                 versionStr = "None"
                 if (None != verInstance):
                     versionStr = verInstance.version
-                dataLine = "%s, %s," % (dataLine, versionStr)
+                dataLine = "%s, %s" % (dataLine, versionStr)
             exportFile.write(dataLine)
             exportFile.write("\n")
 

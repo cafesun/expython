@@ -7,6 +7,7 @@ from db_sqlite_serializer import DBSqlite3Serializer
 class DBSerializerFactory(object):
     '''数据库持久化工厂类'''
 
+    @staticmethod
     def create(type, args):
         '''创建方法'''
         varInstance = None
