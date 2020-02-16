@@ -1,29 +1,55 @@
-import sqlite3
+import mysql.connector
+
 import os
 from collections import OrderedDict
 from pylogger import getLogger
 from package_defines import PackageInfo
 from db_serializer_if import DBSerializerIf
 
-class DBSqlite3Serializer(DBSerializerIf):
-    def __init__(self, dbpath):
-        self.__dbpath = dbpath
+class DBMySqlSerializer(DBSerializerIf):
+    def __init__(self, host, user, passwd):
+        self.__host = host
+        self.__user = user
+        self.__passwd = passwd
         self.__conn = None
+        self.__dbname = "conanpkgs_info"
+
+    def __createDB(self):
+        cursor = self.__conn.cursor()
+        cursor.execute("CREATE DATABASE IF NOT EXISTS %s DEFAULT CHARSET utf8 COLLATE utf8_general_ci" %self.__dbname)
+        cursor.close()
+
+    def __checkDB(self):
+        bDBExist = False
+        self.__conn = mysql.connector.connect(host=self.__host, user=self.__user, passwd=self.__passwd)
+        cursor = self.__conn.cursor(buffered=True)
+        cursor.execute("SHOW DATABASES")
+        row = cursor.fetchone()
+        while (row != None):
+            varDB = row[0]
+            if (varDB == "conanpkgs_info"):
+                bDBExist = True
+                break
+            else :
+                row = cursor.fetchone()
+        cursor.close()
+        if (False == bDBExist):
+            self.__createDB()
+        self.__conn.close()
+        self.__conn = mysql.connector.connect(host=self.__host, user=self.__user,
+                                                 passwd=self.__passwd, database=self.__dbname)
+        if (False == bDBExist):
+            self.__create_tbl()
 
     def open(self):
-        if (self.__dbpath == "") :
-            self.__dbpath = "../data/conanpkgs_info.db"
         cursor = None
         try :
-            self.__conn = sqlite3.connect(self.__dbpath)
-            cursor = self.__conn.cursor()
-            cursor.execute("select * from sqlite_master where type ='table' and name='t_conan_pkginfo'")
-            varExist = cursor.fetchone()
-            if (varExist == None) :
-                self.__create_tbl()
+            self.__checkDB()
             return True
-        except StandardError as ex:
-            getLogger().error("Open DB Failed(%s)" %(str(ex)))
+        except mysql.connector.Error as e:
+            getLogger().error("Connect to DB Failed (%s)" %e.message)
+        except :
+            getLogger().error("Open DB Failed!")
             if (cursor != None) :
                 cursor.close()
             if (self.__conn != None) :
@@ -36,8 +62,8 @@ class DBSqlite3Serializer(DBSerializerIf):
     def set(self, pkgInfoList):
         cursor = self.__conn.cursor()
         insertTblSql = '''
-                    insert or replace into t_conan_pkginfo(cbranch, cid, cname, cversion, ctype, cchannel) values(
-                    ?, ?, ?, ?, ?, ?)
+                    replace into t_conan_pkginfo(cbranch, cid, cname, cversion, ctype, cchannel) values(
+                    %s, %s, %s, %s, %s, %s)
                 '''
         for itData in pkgInfoList :
             pkgId = itData.getPkgID()
@@ -49,7 +75,7 @@ class DBSqlite3Serializer(DBSerializerIf):
     def delete(self, pkgInfoList):
         cursor = self.__conn.cursor()
         deleteTblSql = '''
-                            delete from t_conan_pkginfo where cbranch=? and cid=?
+                            delete from t_conan_pkginfo where cbranch=%s and cid=%s
                         '''
         for itData in pkgInfoList:
             pkgId = itData.getPkgID()
@@ -66,7 +92,7 @@ class DBSqlite3Serializer(DBSerializerIf):
             queryTblSql = '''select distinct(cid) from t_conan_pkginfo'''
             cursor.execute(queryTblSql)
         else:
-            queryTblSql = '''select distinct(cid) from t_conan_pkginfo where ctype=?'''
+            queryTblSql = '''select distinct(cid) from t_conan_pkginfo where ctype=%s'''
             cursor.execute(queryTblSql, (user, ))
         row = cursor.fetchone()
         while (None != row):
@@ -84,7 +110,7 @@ class DBSqlite3Serializer(DBSerializerIf):
             queryTblSql = '''select distinct(cname) from t_conan_pkginfo'''
             cursor.execute(queryTblSql)
         else :
-            queryTblSql = '''select distinct(cname) from t_conan_pkginfo where ctype=?'''
+            queryTblSql = '''select distinct(cname) from t_conan_pkginfo where ctype=%s'''
             cursor.execute(queryTblSql, (user,))
         row = cursor.fetchone()
         while (None != row):
@@ -114,7 +140,7 @@ class DBSqlite3Serializer(DBSerializerIf):
         '''查询指定分支下的所有包信息，返回的map  key为packageID'''
         cursor = self.__conn.cursor()
         queryTblSql = '''
-                              select cbranch, cid, cname, cversion, ctype, cchannel from t_conan_pkginfo where cbranch=?
+                              select cbranch, cid, cname, cversion, ctype, cchannel from t_conan_pkginfo where cbranch=%s
                           '''
         cursor.execute(queryTblSql, (branch, ))
         row = cursor.fetchone()
@@ -134,7 +160,7 @@ class DBSqlite3Serializer(DBSerializerIf):
         '''查询指定分支下的所有包信息,返回的map key为package Name'''
         cursor = self.__conn.cursor()
         queryTblSql = '''
-                              select cbranch, cid, cname, cversion, ctype, cchannel from t_conan_pkginfo where cbranch=?
+                              select cbranch, cid, cname, cversion, ctype, cchannel from t_conan_pkginfo where cbranch=%s
                           '''
         cursor.execute(queryTblSql, (branch, ))
         row = cursor.fetchone()
@@ -175,15 +201,15 @@ class DBSqlite3Serializer(DBSerializerIf):
             return False
         cursor = self.__conn.cursor()
         createTblSql = '''
-            create table t_conan_pkginfo (
-                cbranch TEXT,
-                cid TEXT,
-                cname TEXT,
-                cversion TEXT,
-                ctype TEXT,
-                cchannel TEXT,
-                primary key(cbranch, cid))
-        '''
+          CREATE TABLE t_conan_pkginfo (
+            cbranch VARCHAR(128),
+            cid VARCHAR(512),
+            cname VARCHAR(128) NOT NULL,
+            cversion VARCHAR(128) NOT NULL,
+            ctype VARCHAR(128) NOT NULL,
+            cchannel VARCHAR(128) NOT NULL,
+            PRIMARY KEY(cbranch, cid)) ENGINE=INNODB DEFAULT CHARSET=utf8
+                '''
         cursor.execute(createTblSql)
         self.__conn.commit()
         cursor.close()
@@ -192,8 +218,8 @@ class DBSqlite3Serializer(DBSerializerIf):
 
 
 if __name__ == "__main__" :
-    db = DBSqlite3Serializer()
-    db.open()
+    db = DBMySqlSerializer()
+    db.open("127.0.0.1", "root", "vislecaina")
     packageList = []
     for i in range(1, 101) :
         package = PackageInfo()
