@@ -1,5 +1,6 @@
+#!/usr/bin/python
+# -*- coding:utf8 -*-
 import mysql.connector
-
 import os
 from collections import OrderedDict
 from pylogger import getLogger

@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding:utf8 -*-
+
 from abc import ABC, abstractmethod
 
 class DBSerializerIf(ABC):

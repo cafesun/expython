@@ -1,8 +1,6 @@
 #!/usr/bin/python
 # -*- coding:utf8 -*-
 
-
-
 class PackageInfo(object):
     ''' 包基本信息'''
     def __init__(self):

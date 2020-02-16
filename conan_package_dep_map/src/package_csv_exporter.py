@@ -3,7 +3,6 @@
 
 from collections import OrderedDict
 
-
 class CSVExporter(object):
 
     def __init__(self, db):

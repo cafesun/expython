@@ -1,3 +1,6 @@
+#!/usr/bin/python
+# -*- coding:utf8 -*-
+
 import sqlite3
 import os
 from collections import OrderedDict

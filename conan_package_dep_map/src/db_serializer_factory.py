@@ -1,6 +1,8 @@
+#!/usr/bin/python
+# -*- coding:utf8 -*-
+
 from db_mysql_serializer import DBMySqlSerializer
 from db_sqlite_serializer import DBSqlite3Serializer
-
 
 class DBSerializerFactory(object):
     '''数据库持久化工厂类'''
