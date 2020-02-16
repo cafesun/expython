@@ -5,7 +5,7 @@ import os, re
 import collections
 from pylogger import getLogger
 from package_defines import PackageInfo
-from ast_pyclass_parser import ConanFileParserWarapper
+from deprecated.ast_pyclass_parser import ConanFileParserWarapper
 
 class ConanPkgAnalyzer(object):
     '''conan包分析器'''
