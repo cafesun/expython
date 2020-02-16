@@ -34,7 +34,10 @@ def main() :
     if (args.config=="") :
         configpath = "../conf/config.ini"
     config = ConfigParser()
-    config.read(configpath, encoding="utf-8")
+    if sys.version_info.major == 2:
+        config.read(configpath)
+    else:
+        config.read(configpath, encoding="utf-8")
     dbtype = config.get("config", "dbtype")
     #getLogger().debug("output path : %s" % (args.outputpath))
     dbParamters = dict(config.items(dbtype))
